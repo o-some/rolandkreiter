@@ -1,11 +1,12 @@
 # Roland Kreiter — Portfolio
 
-Premium Portfolio-Entwurf für den Industrial Designer Roland Kreiter.
+Premium Portfolio-Entwurf für den Industrial Designer Roland Kreiter. Die aktuelle „Chrome Gallery“-Fassung verbindet eine helle Museumsarchitektur mit einer umfangreichen Roland-Avatarserie, großformatigen Produktbildern und einer interaktiven horizontalen Werkschau.
 
 ## Lokal ansehen
 
 ```bash
-python3 -m http.server 4173
+npm install
+npm run dev
 ```
 
 Danach `http://localhost:4173` öffnen.
