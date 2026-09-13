@@ -22,7 +22,7 @@ Diese Website ist ein redaktioneller Portfolio-Entwurf. Personenbezogene Kontakt
 ## Bildquellen
 
 - Porträt: öffentliches XING-Profilbild von Roland Kreiter.
-- mysqueeze: redaktionelles Pressebild aus dem Artikel von The Independent.
+- mysqueeze: Das redaktionelle Pressebild aus dem Artikel von The Independent diente nur als Recherchebezug und wurde aus der veröffentlichten Website sowie dem öffentlichen Repository entfernt. Sichtbar ist ausschließlich das eigenständig erzeugte Editorial-Derivat.
 - AromaPour: Produktmotiv von AdHoc.
 - GIANT und Wave: Produktmotive von Eurocare Wellness.
 - Impact: Produktmotiv von Möbel Karmann.
