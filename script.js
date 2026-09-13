@@ -124,6 +124,7 @@ track.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft') track.scrollBy({ left: -slideStep(), behavior: reducedMotion ? 'auto' : 'smooth' });
 });
 track.addEventListener('pointerdown', event => {
+  if (event.pointerType !== 'mouse') return;
   dragging = true;
   startX = event.clientX;
   startScroll = track.scrollLeft;
