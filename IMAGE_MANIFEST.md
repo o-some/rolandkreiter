@@ -9,7 +9,7 @@ Generated for the Roland Kreiter portfolio on 13 September 2026 with the built-i
 | `assets/images/giant-editorial.webp` | `assets/images/giant.jpg` | Selected Works 03 | Technical exploded arrangement, dark plinth |
 | `assets/images/impact-editorial.webp` | `assets/images/impact.jpg` | Selected Works 04 | Architectural coffee scene, warm liquid contrast |
 | `assets/images/collection-editorial.webp` | `scape.jpg`, `mrs-bean.jpg`, `wave.jpg` | Selected Works 05 | Museum-like family still life |
-| `assets/images/giant-center-exploded-v2.webp` | `giant.jpg`, previous editorial derivative | Selected Works 03 | Connected stainless chambers; only the black center mechanism is opened |
+| `assets/images/giant-assembled-v3.webp` | corrected GIANT editorial derivative, factual product reference | Selected Works 03 · final | Fully assembled four-way mill; closed seamless black center, no detached components |
 | `assets/images/mysqueeze-ambience-v2.webp` | previous mysqueeze editorial derivative | Mobile hero atmosphere | Pale architectural kitchen-gallery, natural citrus context |
 | `assets/images/mysqueeze-material-macro-v2.webp` | `mysqueeze-ambience-v2.webp` | Material study | Newly rendered stainless rib macro with restrained cobalt reflection |
 
