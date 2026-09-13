@@ -12,6 +12,8 @@ Generated for the Roland Kreiter portfolio on 13 September 2026 with the built-i
 | `assets/images/giant-assembled-v3.jpg` | corrected GIANT editorial derivative, factual product reference | Selected Works 03 · final | Fully assembled four-way mill; closed seamless black center, no detached components; JPEG delivery fallback for Safari/iPhone |
 | `assets/images/mysqueeze-ambience-v2.webp` | previous mysqueeze editorial derivative | Mobile hero atmosphere | Pale architectural kitchen-gallery, natural citrus context |
 | `assets/images/mysqueeze-material-macro-v2.webp` | `mysqueeze-ambience-v2.webp` | Material study | Newly rendered stainless rib macro with restrained cobalt reflection |
+| `assets/images/mood-precision-gallery-v1.webp` | none — original generated scene | Atmospheric transition | Monumental design gallery with abstract steel, graphite and cobalt material composition |
+| `assets/images/mood-continuous-form-v1.webp` | none — original generated scene | Freelance mood image | Continuous brushed-steel ribbon, graphite stone and optical cobalt glass |
 
 ## Roland avatar series
 
