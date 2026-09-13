@@ -1,4 +1,4 @@
-# Design QA — Mobile sales-funnel revision
+# Design QA — Mobile project-gallery revision
 
 Date: 13 September 2026
 
@@ -8,12 +8,14 @@ Date: 13 September 2026
 - `/workspace/scratch/8f206493c8a0/upload/F173346C-19EF-4038-9B08-546912B5A66C.jpeg` — mobile intro typography, 707 × 1536 px.
 - `/workspace/scratch/8f206493c8a0/upload/AE3A8CEF-01AD-4432-8798-60C669D79504.jpeg` — mobile glass treatment, 707 × 1536 px.
 - `/workspace/scratch/8f206493c8a0/upload/B3B027D5-8034-4644-812D-C0E2FD2D8DAF.jpeg` — mobile product crop and split-card alignment, 707 × 1536 px.
+- `/workspace/scratch/8f206493c8a0/upload/022000F0-7103-4ED7-9D0F-255017FE0E3B.jpeg` — mobile gallery at card 05 and blocked vertical-scroll region, 707 × 1536 px.
+- `/workspace/scratch/8f206493c8a0/upload/E93751EA-C5F9-4FC5-B7A0-369037244F15.jpeg` — mobile gallery stopped between AromaPour and GIANT, 707 × 1536 px.
 
 The supplied captures include iPhone Safari chrome and appear to be approximately 2× density. The exact CSS viewport could not be reproduced by the available cloud browser.
 
 ## Implementation evidence
 
-- Live implementation: `https://o-some.github.io/rolandkreiter/?release=616fad8`
+- Live implementation: `https://o-some.github.io/rolandkreiter/?release=6a7b62f`
 - Browser-rendered desktop viewport: 1363 × 936 CSS px, device density controlled by the cloud browser.
 - Desktop full-view checks were performed for Selected Works and the new Freelance section.
 - The cloud browser did not expose a supported mobile viewport control, so no valid same-viewport mobile screenshot could be saved.
@@ -36,19 +38,25 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
   - Fix: the mobile track now exposes exactly one 100%-wide card; all project imagery uses `object-fit: contain` inside an identical 4:3 stage so the full product remains visible.
 - [P2] The narrative needed a stronger visual transition without reintroducing mobile scroll jank.
   - Fix: two fully original generated mood scenes were added. Desktop uses very low-rate frame-scheduled parallax; mobile renders both scenes statically.
+- [P1] The project track captured vertical finger movement on iPhone because its mobile `touch-action` was restricted to horizontal panning.
+  - Fix: the mobile track now uses `touch-action: pan-y`, hides manual horizontal overflow and leaves card changes to the explicit Previous/Next controls. Vertical page scrolling can begin anywhere over the gallery.
+- [P1] A manual swipe could stop between two slides, exposing clipped imagery, headings and body copy from adjacent cards.
+  - Fix: free mobile swiping was removed; every button step targets one exact slide offset. Each slide also uses `scroll-snap-stop: always` as a defensive desktop/tablet fallback.
+- [P1] Three project images used portrait or extra-wide source ratios while GIANT and Impact used 3:2.
+  - Fix: mysqueeze, AromaPour and Daily rituals were re-composed as new 1536 × 1024 derivatives. GIANT and Impact were retained, so all five gallery assets are now exactly 3:2 without rebuilding the already correct two.
 
 ## Required fidelity surfaces
 
 - Typography: mobile heading scale, line height and wrapping corrected; exact iPhone Safari font rasterization remains to be checked.
-- Spacing/layout: desktop card widths measured equally at 880 px; mobile CSS assigns one identical width and 4:3 image frame to all slides.
+- Spacing/layout: desktop card widths measured equally at 880 px; mobile CSS assigns one identical card width and 3:2 image frame to all slides. Wide-class cards now use the same desktop grid ratio as the other cards.
 - Colors/tokens: cobalt accent retained; glass changed from opaque grey cards to one transparent dark surface with restrained white edge and shadow.
-- Image quality: all live images loaded without broken resources; GIANT remains the generated fully assembled JPEG. Both new 1536 × 1024 mood images loaded successfully and are below 100 KB each.
+- Image quality: all five live gallery images loaded at 1536 × 1024 without broken resources; GIANT remains the generated fully assembled JPEG. The three new derivatives keep each complete product inside a generous safe frame.
 - Copy/content: Freelance positioning, service scope and conversion CTA added without invented client numbers or availability claims.
 
 ## Primary interactions tested
 
-- Selected Works next control advanced 01 → 02 → 03 and aligned GIANT as the active slide.
-- Project counter updated to `03`.
+- Selected Works next control advanced through all five slides; the counter settled at `05` and the last card reached the track's valid end position.
+- Every gallery image reported a 1536 × 1024 natural size on the live deployment.
 - Freelancer section and both CTA targets are present.
 - No website-origin console errors were observed; one unrelated browser-extension metadata error was ignored.
 - No broken images or document-level horizontal overflow were observed at the desktop viewport.
@@ -62,5 +70,8 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
 4. A same-state, same-viewport iPhone comparison is still unavailable and must be confirmed from a refreshed user capture.
 5. The later iPhone capture exposed residual product cropping and a visible neighboring card; both mobile rules were replaced with single-card/full-product presentation.
 6. Post-fix desktop evidence confirms both original mood scenes load and the low-rate parallax composition remains visually stable. Exact iPhone confirmation is still pending.
+7. New iPhone evidence showed that `touch-action: pan-x` blocked vertical scrolling and native swipe could leave the carousel between cards.
+8. Mobile touch handling was changed to vertical page panning plus button-only card navigation, and the three ratio outliers were rebuilt as exact 3:2 assets.
+9. Post-fix live desktop evidence confirms versioned CSS `v=10`, five 1536 × 1024 gallery images, successful navigation to card 05 and zero document-level horizontal overflow. A refreshed same-state iPhone capture remains required for a valid mobile comparison.
 
 final result: blocked
