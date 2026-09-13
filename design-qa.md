@@ -7,12 +7,13 @@ Date: 13 September 2026
 - `/workspace/scratch/8f206493c8a0/upload/BF595EE1-B499-4FBD-B61A-3B8C683C641F.jpeg` — mobile project carousel, 707 × 1536 px.
 - `/workspace/scratch/8f206493c8a0/upload/F173346C-19EF-4038-9B08-546912B5A66C.jpeg` — mobile intro typography, 707 × 1536 px.
 - `/workspace/scratch/8f206493c8a0/upload/AE3A8CEF-01AD-4432-8798-60C669D79504.jpeg` — mobile glass treatment, 707 × 1536 px.
+- `/workspace/scratch/8f206493c8a0/upload/B3B027D5-8034-4644-812D-C0E2FD2D8DAF.jpeg` — mobile product crop and split-card alignment, 707 × 1536 px.
 
 The supplied captures include iPhone Safari chrome and appear to be approximately 2× density. The exact CSS viewport could not be reproduced by the available cloud browser.
 
 ## Implementation evidence
 
-- Live implementation: `https://o-some.github.io/rolandkreiter/?release=a543605`
+- Live implementation: `https://o-some.github.io/rolandkreiter/?release=616fad8`
 - Browser-rendered desktop viewport: 1363 × 936 CSS px, device density controlled by the cloud browser.
 - Desktop full-view checks were performed for Selected Works and the new Freelance section.
 - The cloud browser did not expose a supported mobile viewport control, so no valid same-viewport mobile screenshot could be saved.
@@ -31,13 +32,17 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
   - Fix: scroll updates are frame-scheduled, section positions are cached, mobile parallax/view-timeline animation is removed, and lightweight one-time reveal motion remains.
 - [P1] The portfolio lacked a direct commercial conversion path.
   - Fix: a Freelance Industrial Design section now presents the offer, three services, proof context, and two clear next actions leading to process and contact.
+- [P1] The latest iPhone capture still showed a partial previous card and aggressive product cropping.
+  - Fix: the mobile track now exposes exactly one 100%-wide card; all project imagery uses `object-fit: contain` inside an identical 4:3 stage so the full product remains visible.
+- [P2] The narrative needed a stronger visual transition without reintroducing mobile scroll jank.
+  - Fix: two fully original generated mood scenes were added. Desktop uses very low-rate frame-scheduled parallax; mobile renders both scenes statically.
 
 ## Required fidelity surfaces
 
 - Typography: mobile heading scale, line height and wrapping corrected; exact iPhone Safari font rasterization remains to be checked.
 - Spacing/layout: desktop card widths measured equally at 880 px; mobile CSS assigns one identical width and 4:3 image frame to all slides.
 - Colors/tokens: cobalt accent retained; glass changed from opaque grey cards to one transparent dark surface with restrained white edge and shadow.
-- Image quality: all live images loaded without broken resources; GIANT remains the generated fully assembled JPEG.
+- Image quality: all live images loaded without broken resources; GIANT remains the generated fully assembled JPEG. Both new 1536 × 1024 mood images loaded successfully and are below 100 KB each.
 - Copy/content: Freelance positioning, service scope and conversion CTA added without invented client numbers or availability claims.
 
 ## Primary interactions tested
@@ -47,6 +52,7 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
 - Freelancer section and both CTA targets are present.
 - No website-origin console errors were observed; one unrelated browser-extension metadata error was ignored.
 - No broken images or document-level horizontal overflow were observed at the desktop viewport.
+- The new full-width mood transition and the Freelance mood image were visually inspected in the browser at 1363 × 936 CSS px.
 
 ## Comparison history
 
@@ -54,5 +60,7 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
 2. The layout, navigation math, glass composition and scroll system were rebuilt.
 3. Post-fix desktop browser evidence confirms equal project-card widths, working carousel navigation, loaded imagery and the complete Freelancer section.
 4. A same-state, same-viewport iPhone comparison is still unavailable and must be confirmed from a refreshed user capture.
+5. The later iPhone capture exposed residual product cropping and a visible neighboring card; both mobile rules were replaced with single-card/full-product presentation.
+6. Post-fix desktop evidence confirms both original mood scenes load and the low-rate parallax composition remains visually stable. Exact iPhone confirmation is still pending.
 
 final result: blocked
