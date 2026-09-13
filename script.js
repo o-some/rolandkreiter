@@ -5,20 +5,48 @@ const progress = document.querySelector('[data-progress]');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
 const sections = sectionLinks.map(link => document.getElementById(link.dataset.sectionLink)).filter(Boolean);
+const parallaxItems = [...document.querySelectorAll('[data-parallax]')];
+let sectionTops = [];
+let pageFrame = 0;
 
-const updatePageState = () => {
+const measureSections = () => {
+  sectionTops = sections.map(section => ({ section, top: section.offsetTop }));
+};
+
+const renderPageState = () => {
+  pageFrame = 0;
   header.classList.toggle('scrolled', window.scrollY > 28);
   const max = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
   const marker = window.scrollY + window.innerHeight * .35;
-  const active = sections
-    .map(section => ({ section, top: section.getBoundingClientRect().top + window.scrollY }))
+  const active = sectionTops
     .filter(item => item.top <= marker)
     .sort((a, b) => b.top - a.top)[0]?.section || sections[0];
   sectionLinks.forEach(link => link.classList.toggle('is-active', link.dataset.sectionLink === active.id));
+
+  if (!reducedMotion && window.innerWidth > 820) {
+    parallaxItems.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const rate = Number(item.dataset.parallax || 0);
+      item.querySelector('img').style.transform = `translate3d(0,${(rect.top - window.innerHeight / 2) * rate}px,0)`;
+    });
+  }
 };
-updatePageState();
-window.addEventListener('scroll', updatePageState, { passive: true });
+
+const schedulePageState = () => {
+  if (!pageFrame) pageFrame = requestAnimationFrame(renderPageState);
+};
+
+measureSections();
+renderPageState();
+window.addEventListener('scroll', schedulePageState, { passive: true });
+window.addEventListener('resize', () => {
+  measureSections();
+  if (window.innerWidth <= 820) parallaxItems.forEach(item => item.querySelector('img').style.removeProperty('transform'));
+  schedulePageState();
+}, { passive: true });
+window.addEventListener('load', () => { measureSections(); schedulePageState(); }, { once: true });
 
 const closeMenu = () => {
   if (mobileMenu.open) mobileMenu.close();
@@ -52,17 +80,6 @@ if (reducedMotion) {
     revealObserver.observe(element);
   });
 
-  const parallaxItems = [...document.querySelectorAll('[data-parallax]')];
-  const updateParallax = () => {
-    parallaxItems.forEach(item => {
-      const rect = item.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-      const rate = Number(item.dataset.parallax || 0);
-      item.querySelector('img').style.transform = `translateY(${(rect.top - window.innerHeight / 2) * rate}px)`;
-    });
-  };
-  window.addEventListener('scroll', updateParallax, { passive: true });
-  updateParallax();
 }
 
 const counters = document.querySelectorAll('[data-count]');
@@ -109,19 +126,33 @@ const current = document.querySelector('[data-track-current]');
 let dragging = false;
 let startX = 0;
 let startScroll = 0;
+let projectIndex = 0;
+let trackFrame = 0;
 
-const slideStep = () => slides[0].getBoundingClientRect().width + 24;
 const updateTrackIndex = () => {
-  const index = Math.max(0,Math.min(slides.length - 1,Math.round(track.scrollLeft / slideStep())));
-  current.textContent = String(index + 1).padStart(2,'0');
+  trackFrame = 0;
+  projectIndex = slides.reduce((closest, slide, index) => {
+    const distance = Math.abs((slide.offsetLeft - track.offsetLeft) - track.scrollLeft);
+    return distance < closest.distance ? { index, distance } : closest;
+  }, { index: 0, distance: Infinity }).index;
+  current.textContent = String(projectIndex + 1).padStart(2,'0');
 };
 
-document.querySelector('[data-track-next]').addEventListener('click', () => track.scrollBy({ left: slideStep(), behavior: reducedMotion ? 'auto' : 'smooth' }));
-document.querySelector('[data-track-prev]').addEventListener('click', () => track.scrollBy({ left: -slideStep(), behavior: reducedMotion ? 'auto' : 'smooth' }));
-track.addEventListener('scroll', updateTrackIndex, { passive: true });
+const scrollToProject = index => {
+  projectIndex = Math.max(0, Math.min(slides.length - 1, index));
+  current.textContent = String(projectIndex + 1).padStart(2,'0');
+  track.scrollTo({ left: slides[projectIndex].offsetLeft - track.offsetLeft, behavior: reducedMotion ? 'auto' : 'smooth' });
+};
+
+document.querySelector('[data-track-next]').addEventListener('click', () => scrollToProject(projectIndex + 1));
+document.querySelector('[data-track-prev]').addEventListener('click', () => scrollToProject(projectIndex - 1));
+track.addEventListener('scroll', () => {
+  if (!trackFrame) trackFrame = requestAnimationFrame(updateTrackIndex);
+}, { passive: true });
 track.addEventListener('keydown', event => {
-  if (event.key === 'ArrowRight') track.scrollBy({ left: slideStep(), behavior: reducedMotion ? 'auto' : 'smooth' });
-  if (event.key === 'ArrowLeft') track.scrollBy({ left: -slideStep(), behavior: reducedMotion ? 'auto' : 'smooth' });
+  if (!['ArrowLeft','ArrowRight'].includes(event.key)) return;
+  event.preventDefault();
+  scrollToProject(projectIndex + (event.key === 'ArrowRight' ? 1 : -1));
 });
 track.addEventListener('pointerdown', event => {
   if (event.pointerType !== 'mouse') return;
@@ -143,6 +174,7 @@ const stopDrag = event => {
 };
 track.addEventListener('pointerup', stopDrag);
 track.addEventListener('pointercancel', stopDrag);
+window.addEventListener('resize', () => scrollToProject(projectIndex), { passive: true });
 
 const awardsTrack = document.querySelector('[data-awards-track]');
 const awardCards = [...awardsTrack.children];
@@ -158,7 +190,9 @@ const updateAwardIndex = () => {
 awardsTrack.addEventListener('scroll', updateAwardIndex, { passive: true });
 awardsTrack.addEventListener('keydown', event => {
   if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+  event.preventDefault();
   const direction = event.key === 'ArrowRight' ? 1 : -1;
-  awardsTrack.scrollBy({ left: direction * awardCards[0].getBoundingClientRect().width, behavior: reducedMotion ? 'auto' : 'smooth' });
+  const gap = parseFloat(getComputedStyle(awardsTrack).columnGap) || 0;
+  awardsTrack.scrollBy({ left: direction * (awardCards[0].getBoundingClientRect().width + gap), behavior: reducedMotion ? 'auto' : 'smooth' });
 });
 updateAwardIndex();
