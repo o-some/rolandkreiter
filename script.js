@@ -142,3 +142,22 @@ const stopDrag = event => {
 };
 track.addEventListener('pointerup', stopDrag);
 track.addEventListener('pointercancel', stopDrag);
+
+const awardsTrack = document.querySelector('[data-awards-track]');
+const awardCards = [...awardsTrack.children];
+const awardCurrent = document.querySelector('[data-award-current]');
+const updateAwardIndex = () => {
+  const firstCard = awardCards[0];
+  if (!firstCard) return;
+  const gap = parseFloat(getComputedStyle(awardsTrack).columnGap) || 0;
+  const index = Math.max(0, Math.min(awardCards.length - 1, Math.round(awardsTrack.scrollLeft / (firstCard.getBoundingClientRect().width + gap))));
+  awardCurrent.textContent = String(index + 1).padStart(2, '0');
+  awardCards.forEach((card, cardIndex) => card.classList.toggle('is-current', cardIndex === index));
+};
+awardsTrack.addEventListener('scroll', updateAwardIndex, { passive: true });
+awardsTrack.addEventListener('keydown', event => {
+  if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+  const direction = event.key === 'ArrowRight' ? 1 : -1;
+  awardsTrack.scrollBy({ left: direction * awardCards[0].getBoundingClientRect().width, behavior: reducedMotion ? 'auto' : 'smooth' });
+});
+updateAwardIndex();

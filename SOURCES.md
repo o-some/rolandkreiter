@@ -34,6 +34,8 @@ Die Bilder werden im Repository ausschließlich als Recherche- und Layoutmateria
 
 Die fünf großformatigen Produktinszenierungen wurden als eigenständige, KI-gestützte Editorial-Derivate aus den dokumentierten Produktreferenzen erstellt. Zuordnung, Verwendungsort und Art Direction sind in [`IMAGE_MANIFEST.md`](IMAGE_MANIFEST.md) festgehalten. Die neuen Bilder ersetzen keine Behauptung über die reale Produktfotografie; Form und charakteristische Materialien der Referenzprodukte wurden als verbindliche Grundlage verwendet.
 
+Seit der mobilen Überarbeitung werden im veröffentlichten Seitenquelltext ausschließlich neu erstellte Editorial- und Avatarbilder eingebunden. Heruntergeladene Recherchebilder werden nicht direkt ausgeliefert. Auch die korrigierte GIANT-Darstellung, die mysqueeze-Ambienteszene und das Materialmakro sind vollständige Neuanfertigungen.
+
 ## Roland-Avatarserie
 
 Für die neue Galeriegestaltung wurden aus dem vorhandenen, öffentlich zuordenbaren Porträt fünf eigenständige Avatar-Szenen entwickelt. Sie zeigen Roland in stilisierten Galerie-, Studio- und Produktsituationen und sind deshalb bewusst als inszenierte Editorialbilder zu verstehen, nicht als dokumentarische Aufnahmen. Das reale Porträt dient ausschließlich als Identitätsanker; Rollen und Einsatzorte sind im Bildmanifest dokumentiert.

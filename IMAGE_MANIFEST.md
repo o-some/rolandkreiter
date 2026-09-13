@@ -9,6 +9,9 @@ Generated for the Roland Kreiter portfolio on 13 September 2026 with the built-i
 | `assets/images/giant-editorial.webp` | `assets/images/giant.jpg` | Selected Works 03 | Technical exploded arrangement, dark plinth |
 | `assets/images/impact-editorial.webp` | `assets/images/impact.jpg` | Selected Works 04 | Architectural coffee scene, warm liquid contrast |
 | `assets/images/collection-editorial.webp` | `scape.jpg`, `mrs-bean.jpg`, `wave.jpg` | Selected Works 05 | Museum-like family still life |
+| `assets/images/giant-center-exploded-v2.webp` | `giant.jpg`, previous editorial derivative | Selected Works 03 | Connected stainless chambers; only the black center mechanism is opened |
+| `assets/images/mysqueeze-ambience-v2.webp` | previous mysqueeze editorial derivative | Mobile hero atmosphere | Pale architectural kitchen-gallery, natural citrus context |
+| `assets/images/mysqueeze-material-macro-v2.webp` | `mysqueeze-ambience-v2.webp` | Material study | Newly rendered stainless rib macro with restrained cobalt reflection |
 
 ## Roland avatar series
 
@@ -25,5 +28,7 @@ The portrait derivatives below were created from the existing Roland Kreiter ide
 All five derivatives were optimized as stripped WebP files. They contain no embedded source metadata, text, watermark, or invented brand mark.
 
 All generated assets intentionally contain no text, watermark or invented brand mark. The optimized WebP files are the website derivatives. The former third-party `mysqueeze.jpg` press image was removed from the published repository on request; its origin remains documented without redistributing the file.
+
+Only newly generated editorial derivatives are referenced by the published HTML and CSS. Downloaded research references are kept outside the current public branch and are never served as website assets.
 
 Final public use still requires confirmation that the underlying product-image references and derived editorial presentations may be used by Roland Kreiter.
