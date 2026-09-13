@@ -14,6 +14,9 @@ Generated for the Roland Kreiter portfolio on 13 September 2026 with the built-i
 | `assets/images/mysqueeze-material-macro-v2.webp` | `mysqueeze-ambience-v2.webp` | Material study | Newly rendered stainless rib macro with restrained cobalt reflection |
 | `assets/images/mood-precision-gallery-v1.webp` | none — original generated scene | Atmospheric transition | Monumental design gallery with abstract steel, graphite and cobalt material composition |
 | `assets/images/mood-continuous-form-v1.webp` | none — original generated scene | Freelance mood image | Continuous brushed-steel ribbon, graphite stone and optical cobalt glass |
+| `assets/images/mysqueeze-editorial-landscape-v1.webp` | `assets/images/mysqueeze-editorial.webp` | Selected Works 01 · unified gallery | Reframed 3:2 graphite studio scene; complete product with safe margins |
+| `assets/images/aromapour-editorial-landscape-v1.webp` | `assets/images/aromapour-editorial.webp` | Selected Works 02 · unified gallery | Reframed 3:2 stone-and-steel scene; complete bottle and spout with safe margins |
+| `assets/images/collection-editorial-landscape-v1.webp` | `assets/images/collection-editorial.webp` | Selected Works 05 · unified gallery | Reframed 3:2 museum still life; complete four-object family with safe margins |
 
 ## Roland avatar series
 
