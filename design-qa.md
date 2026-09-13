@@ -1,33 +1,31 @@
-# Design QA — Chrome Gallery
+# Design QA — Mobile gallery revision
 
-Date: 13 September 2026  
-Reference: selected Chrome Gallery concept  
-Implementation: https://o-some.github.io/rolandkreiter/
+Date: 13 September 2026
 
-## Blocking gate
+## Source evidence
 
-- Reference and implementation were visually compared together.
-- Core composition matches: fixed left rail, light museum field, oversized sans/serif name lockup, product hero, right-aligned portrait, cobalt micro-accents.
-- The implementation intentionally extends the concept with a usable header, five-project horizontal gallery, process story, five-item awards timeline, profile chronology and contact section.
-- No P0, P1 or P2 issue remains.
+- User-supplied iPhone screenshot of the Awards section.
+- Observed P1: “Ausgezeichnete” exceeded the mobile viewport and created a false right-side canvas.
+- Observed P2: excessive empty vertical space before the Awards heading.
+- Observed P2: vertically stacked awards felt static and repetitive.
+- Observed P2: wide project photography was cropped too aggressively inside portrait cards.
+- Observed content issue: the GIANT outer mill chambers were incorrectly detached.
 
-## Functional verification
+## Implemented corrections
 
-- Production build passed with Vite.
-- Live GitHub Pages document loads without application console errors.
-- All above-the-fold and section images load; horizontally off-screen project images use native lazy loading.
-- Product gallery next control advances the counter from 01 to 02.
-- Active side-navigation state follows the actual document section after scrolling.
-- Page has no horizontal overflow at the verified 1348 px desktop viewport.
-- Mobile navigation uses the native dialog element, explicit open/close controls, body scroll lock and closes on destination selection.
-- Responsive layouts are defined at 820 px and 560 px, replacing the side rail with the compact mobile header and stacking galleries, awards and profile content.
-- Reduced-motion users receive static reveals and non-animated gallery movement.
+- Mobile heading scale is word-safe; the Awards title uses two controlled non-breaking lines.
+- Page and section widths are constrained to the viewport.
+- Mobile awards use a horizontal scroll-snap gallery with position counter.
+- Wide project images use a dedicated 4:3 contained presentation.
+- Mobile hero now includes the new mysqueeze ambience scene.
+- Material study uses a newly generated stainless-steel macro.
+- GIANT uses a newly generated image: all four stainless chambers remain connected and only the black center mechanism is opened.
+- Subtle view-linked image drift adds motion on supported mobile browsers and respects reduced-motion preferences.
+- Published HTML and CSS reference only newly generated editorial and avatar images.
+- Desktop browser verification passed with no application console errors or horizontal overflow.
 
-## Content and image integrity
+## Remaining verification
 
-- Five new Roland scenes use the existing portrait solely as an identity anchor and are documented as staged avatar imagery.
-- Product references, awards and research sources remain documented in `SOURCES.md` and `IMAGE_MANIFEST.md`.
-- Generated WebP derivatives are stripped and optimized.
-- Search indexing remains disabled pending final portrait, biography, legal and image-rights approval.
+The cloud browser exposes only a desktop viewport in this session. It rejected creation of a separate mobile-width comparison surface, so a same-viewport post-fix iPhone capture is not available here. Final mobile visual comparison requires a refreshed screenshot from the user’s device.
 
-final result: passed
+final result: blocked
