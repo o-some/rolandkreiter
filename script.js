@@ -11,10 +11,10 @@ const updatePageState = () => {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
   const marker = window.scrollY + window.innerHeight * .35;
-  const active = sections.reduce((current, section) => {
-    const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-    return sectionTop <= marker ? section : current;
-  }, sections[0]);
+  const active = sections
+    .map(section => ({ section, top: section.getBoundingClientRect().top + window.scrollY }))
+    .filter(item => item.top <= marker)
+    .sort((a, b) => b.top - a.top)[0]?.section || sections[0];
   sectionLinks.forEach(link => link.classList.toggle('is-active', link.dataset.sectionLink === active.id));
 };
 updatePageState();
