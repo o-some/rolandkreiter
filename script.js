@@ -1,25 +1,27 @@
 const header = document.querySelector('[data-header]');
 const menuButton = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.site-nav');
+const mobileMenu = document.querySelector('#mobile-menu');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const setHeader = () => header.classList.toggle('scrolled', window.scrollY > 36);
 setHeader();
 window.addEventListener('scroll', setHeader, { passive: true });
 
+const closeMenu = () => {
+  if (mobileMenu.open) mobileMenu.close();
+  menuButton.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+};
+
 menuButton.addEventListener('click', () => {
-  const open = menuButton.getAttribute('aria-expanded') !== 'true';
-  menuButton.setAttribute('aria-expanded', String(open));
-  nav.classList.toggle('open', open);
-  document.body.style.overflow = open ? 'hidden' : '';
+  if (typeof mobileMenu.showModal === 'function') mobileMenu.showModal();
+  else mobileMenu.setAttribute('open', '');
+  menuButton.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
 });
 
-nav.addEventListener('click', event => {
-  if (!event.target.closest('a')) return;
-  menuButton.setAttribute('aria-expanded', 'false');
-  nav.classList.remove('open');
-  document.body.style.overflow = '';
-});
+mobileMenu.addEventListener('close', closeMenu);
+mobileMenu.querySelectorAll('[data-menu-close]').forEach(control => control.addEventListener('click', closeMenu));
 
 document.querySelector('[data-year]').textContent = new Date().getFullYear();
 

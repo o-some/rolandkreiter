@@ -29,3 +29,7 @@ Diese Website ist ein redaktioneller Portfolio-Entwurf. Personenbezogene Kontakt
 - Scape und Mrs. Bean: Produktmotive von Kaufland Marketplace.
 
 Die Bilder werden im Repository ausschließlich als Recherche- und Layoutmaterial des Entwurfs geführt. Eine öffentliche kommerzielle Nutzung erfordert die Freigabe der jeweiligen Rechteinhaber oder den Austausch durch freigegebene Hersteller-/Portfolio-Assets.
+
+## Neue Editorial-Serie
+
+Die fünf großformatigen Produktinszenierungen wurden als eigenständige, KI-gestützte Editorial-Derivate aus den dokumentierten Produktreferenzen erstellt. Zuordnung, Verwendungsort und Art Direction sind in [`IMAGE_MANIFEST.md`](IMAGE_MANIFEST.md) festgehalten. Die neuen Bilder ersetzen keine Behauptung über die reale Produktfotografie; Form und charakteristische Materialien der Referenzprodukte wurden als verbindliche Grundlage verwendet.

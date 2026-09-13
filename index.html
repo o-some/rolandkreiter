@@ -20,16 +20,30 @@
     <a class="brand" href="#top" aria-label="Zur Startseite">
       <span>RK</span><span class="brand-line"></span><span>Industrial Design</span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
       <span>Menü</span><i></i><i></i>
     </button>
-    <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+    <nav class="site-nav" aria-label="Hauptnavigation">
       <a href="#arbeiten">Arbeiten</a>
       <a href="#auszeichnungen">Awards</a>
       <a href="#profil">Profil</a>
       <a class="nav-cta" href="#kontakt">Kontakt <span>↗</span></a>
     </nav>
   </header>
+
+  <dialog class="mobile-menu" id="mobile-menu" aria-label="Mobiles Menü">
+    <div class="mobile-menu__top">
+      <a class="brand" href="#top" data-menu-close><span>RK</span><span class="brand-line"></span><span>Industrial Design</span></a>
+      <button class="mobile-menu__close" type="button" aria-label="Menü schließen" data-menu-close><i></i><i></i></button>
+    </div>
+    <nav class="mobile-menu__nav" aria-label="Mobile Hauptnavigation">
+      <a href="#arbeiten" data-menu-close><span>01</span>Arbeiten</a>
+      <a href="#auszeichnungen" data-menu-close><span>02</span>Awards</a>
+      <a href="#profil" data-menu-close><span>03</span>Profil</a>
+      <a href="#kontakt" data-menu-close><span>04</span>Kontakt</a>
+    </nav>
+    <p class="mobile-menu__foot">Industrial Design · Mannheim</p>
+  </dialog>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
@@ -77,68 +91,66 @@
         <p>Eine Auswahl öffentlich dokumentierter Produktarbeiten.</p>
       </div>
 
-      <div class="project-grid">
-        <article class="project project--feature reveal" data-project>
-          <a href="https://www.alessi.com/" target="_blank" rel="noreferrer" aria-label="mysqueeze – Projekt ansehen">
-            <figure><img src="assets/images/mysqueeze.jpg" alt="mysqueeze Zitronenpresse für Alessi" width="1200" height="2084" loading="lazy"></figure>
-            <div class="project-meta"><span>Alessi · 2010</span><span>01</span></div>
+      <div class="product-stories">
+        <article class="product-story product-story--portrait reveal" data-project>
+          <div class="product-story__visual">
+            <img src="assets/images/mysqueeze-editorial.webp" alt="mysqueeze Zitronenpresse in einer dunklen Editorial-Inszenierung" width="1120" height="1400" loading="lazy">
+            <span class="product-story__index">01 / 05</span>
+          </div>
+          <div class="product-story__info">
+            <p class="product-kicker">Alessi · 2010</p>
             <h3>mysqueeze</h3>
-            <p>Zitronenpresse aus Edelstahl – skulptural in Ruhe, intuitiv in der Anwendung.</p>
-          </a>
+            <p>Ein Alltagsritual, verdichtet zu einer skulpturalen Bewegung. Edelstahl wird hier gleichzeitig Werkzeug und Objekt.</p>
+            <a href="https://www.alessi.com/" target="_blank" rel="noreferrer">Projektkontext <span>↗</span></a>
+          </div>
         </article>
 
-        <article class="project reveal" data-project>
-          <a href="https://adhoc.shop/" target="_blank" rel="noreferrer" aria-label="AromaPour – Projekt ansehen">
-            <figure><img src="assets/images/aromapour.webp" alt="AromaPour Öl- und Essigspender von AdHoc" width="583" height="700" loading="lazy"></figure>
-            <div class="project-meta"><span>AdHoc · 2024</span><span>02</span></div>
+        <article class="product-story product-story--portrait product-story--reverse reveal" data-project>
+          <div class="product-story__visual">
+            <img src="assets/images/aromapour-editorial.webp" alt="AromaPour Ölspender in einer dunklen Studio-Inszenierung" width="1120" height="1400" loading="lazy">
+            <span class="product-story__index">02 / 05</span>
+          </div>
+          <div class="product-story__info">
+            <p class="product-kicker">AdHoc · 2024</p>
             <h3>AromaPour</h3>
-            <p>Kontrolliertes Dosieren, tropffreies Ausgießen und ein präziser Materialmix.</p>
-          </a>
+            <p>Kontrolle ohne Komplexität: präzises Dosieren, tropffreies Ausgießen und ein Materialbild, das den Inhalt sichtbar lässt.</p>
+            <a href="https://adhoc.shop/" target="_blank" rel="noreferrer">Projektkontext <span>↗</span></a>
+          </div>
         </article>
 
-        <article class="project project--dark reveal" data-project>
-          <a href="https://adhoc.shop/" target="_blank" rel="noreferrer" aria-label="GIANT – Projekt ansehen">
-            <figure><img src="assets/images/giant.jpg" alt="Magnetische 4-in-1 Gewürzmühle GIANT von AdHoc" width="1000" height="1000" loading="lazy"></figure>
-            <div class="project-meta"><span>AdHoc · 2022</span><span>03</span></div>
+        <article class="product-story product-story--cinema reveal" data-project>
+          <div class="product-story__visual">
+            <img src="assets/images/giant-editorial.webp" alt="GIANT magnetische 4-in-1 Gewürzmühle als technische Explosionsdarstellung" width="1536" height="1024" loading="lazy">
+            <span class="product-story__index">03 / 05</span>
+          </div>
+          <div class="product-story__info product-story__info--overlay">
+            <p class="product-kicker">AdHoc · Red Dot Winner 2022</p>
             <h3>GIANT</h3>
-            <p>Vier Gewürze, ein kompakter Körper, magnetisch zusammengeführt.</p>
-          </a>
+            <p>Vier Gewürze. Ein präziser magnetischer Mittelpunkt.</p>
+          </div>
         </article>
 
-        <article class="project project--wide reveal" data-project>
-          <a href="https://adhoc.shop/" target="_blank" rel="noreferrer" aria-label="Impact French Press – Projekt ansehen">
-            <figure><img src="assets/images/impact.jpg" alt="Impact French Press von AdHoc" width="500" height="500" loading="lazy"></figure>
-            <div class="project-meta"><span>AdHoc · 2025</span><span>04</span></div>
+        <article class="product-story product-story--cinema reveal" data-project>
+          <div class="product-story__visual">
+            <img src="assets/images/impact-editorial.webp" alt="Impact French Press mit Kaffee in einer architektonischen Studio-Szene" width="1536" height="1024" loading="lazy">
+            <span class="product-story__index">04 / 05</span>
+          </div>
+          <div class="product-story__info product-story__info--overlay">
+            <p class="product-kicker">AdHoc · German Design Award 2026</p>
             <h3>Impact</h3>
-            <p>Eine French Press, deren Klarheit vom Brühvorgang bis zur Reinigung gedacht ist.</p>
-          </a>
+            <p>Der Brühvorgang wird zum sichtbaren Bestandteil des Designs.</p>
+          </div>
         </article>
 
-        <article class="project reveal" data-project>
-          <a href="https://adhoc.shop/" target="_blank" rel="noreferrer" aria-label="Scape – Projekt ansehen">
-            <figure><img src="assets/images/scape.jpg" alt="Scape Salz- und Pfeffermühlen von AdHoc" width="784" height="1024" loading="lazy"></figure>
-            <div class="project-meta"><span>AdHoc</span><span>05</span></div>
-            <h3>Scape</h3>
-            <p>Vertikale Struktur, ruhige Proportionen und haptischer Kontrast.</p>
-          </a>
-        </article>
-
-        <article class="project reveal" data-project>
-          <a href="https://adhoc.shop/" target="_blank" rel="noreferrer" aria-label="Mrs. Bean – Projekt ansehen">
-            <figure><img src="assets/images/mrs-bean.jpg" alt="Mrs. Bean Kaffeemühle von AdHoc" width="872" height="1024" loading="lazy"></figure>
-            <div class="project-meta"><span>AdHoc</span><span>06</span></div>
-            <h3>Mrs. Bean</h3>
-            <p>Manuelles Mahlen als bewusstes Ritual – robust, direkt und sinnlich.</p>
-          </a>
-        </article>
-
-        <article class="project project--wide project--last reveal" data-project>
-          <a href="https://adhoc.shop/" target="_blank" rel="noreferrer" aria-label="Wave – Projekt ansehen">
-            <figure><img src="assets/images/wave.jpg" alt="Wave Doppel-Wiegemesser von AdHoc" width="1000" height="1000" loading="lazy"></figure>
-            <div class="project-meta"><span>AdHoc</span><span>07</span></div>
-            <h3>Wave</h3>
-            <p>Werkzeug und Bewegung werden zu einer einzigen, fließenden Geste.</p>
-          </a>
+        <article class="product-story product-story--collection reveal" data-project>
+          <div class="product-story__visual">
+            <img src="assets/images/collection-editorial.webp" alt="Scape, Mrs. Bean und Wave als gemeinsame Produktfamilie inszeniert" width="1672" height="941" loading="lazy">
+            <span class="product-story__index">05 / 05</span>
+          </div>
+          <div class="product-story__info product-story__info--collection">
+            <div><p class="product-kicker">AdHoc · Product Family</p><h3>Daily rituals</h3></div>
+            <p>Scape, Mrs. Bean und Wave zeigen eine gemeinsame Haltung: charaktervolle Geometrie, ehrliche Materialien und eine Funktion, die man sofort versteht.</p>
+          </div>
         </article>
       </div>
     </section>
