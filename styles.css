@@ -92,6 +92,7 @@ em { font-family: Georgia, serif; font-weight: 400; }
 .product-story__info { padding-bottom: clamp(1rem,4vw,4rem); }
 .product-kicker { margin: 0 0 1.2rem; color: var(--silver); text-transform: uppercase; font-size: .68rem; letter-spacing: .16em; font-weight: 700; }
 .product-story__info h3 { margin: 0 0 1.2rem; font-size: clamp(3.4rem,7vw,7.5rem); line-height: .82; letter-spacing: -.07em; font-weight: 560; }
+.product-story--portrait .product-story__info h3 { font-size: clamp(3.1rem,4.6vw,4rem); }
 .product-story__info > p:not(.product-kicker) { max-width: 430px; color: var(--silver); font-size: clamp(1rem,1.35vw,1.2rem); }
 .product-story__info > a { display: inline-flex; justify-content: space-between; gap: 3rem; margin-top: 2rem; padding-bottom: .55rem; border-bottom: 1px solid rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .13em; font-size: .68rem; }
 .product-story__info--overlay { position: absolute; z-index: 3; left: clamp(1.25rem,4vw,4rem); right: clamp(1.25rem,4vw,4rem); bottom: clamp(1rem,3vw,3rem); padding: 0; text-shadow: 0 2px 30px rgba(0,0,0,.6); }
@@ -179,6 +180,7 @@ em { font-family: Georgia, serif; font-weight: 400; }
   .section-head > p:last-child,.awards-intro > p:last-child { grid-column: 2; }
   .product-story,.product-story--reverse { grid-template-columns: minmax(0,1.2fr) minmax(230px,.8fr); }
   .product-story__info h3 { font-size: clamp(3.1rem,8vw,5rem); }
+  .product-story--portrait .product-story__info h3 { font-size: clamp(3rem,6.8vw,4rem); }
 }
 
 @media (max-width: 640px) {
@@ -208,6 +210,7 @@ em { font-family: Georgia, serif; font-weight: 400; }
   .product-story--cinema .product-story__visual img { object-position: 50% 50%; }
   .product-story__info { padding: 0; }
   .product-story__info h3 { font-size: clamp(3.4rem,17vw,5.2rem); margin-bottom: .9rem; }
+  .product-story--portrait .product-story__info h3 { font-size: clamp(3.4rem,17vw,5.2rem); }
   .product-story__info--overlay { position: static; padding: 0; text-shadow: none; }
   .product-story__info--overlay h3 { font-size: clamp(3.4rem,17vw,5.2rem); }
   .product-story__info--overlay > p:not(.product-kicker) { color: var(--silver); }
