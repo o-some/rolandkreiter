@@ -3,11 +3,16 @@ const menuButton = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('#mobile-menu');
 const progress = document.querySelector('[data-progress]');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
+const sections = sectionLinks.map(link => document.getElementById(link.dataset.sectionLink)).filter(Boolean);
 
 const updatePageState = () => {
   header.classList.toggle('scrolled', window.scrollY > 28);
   const max = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
+  const marker = window.scrollY + window.innerHeight * .35;
+  const active = sections.reduce((current, section) => section.offsetTop <= marker ? section : current, sections[0]);
+  sectionLinks.forEach(link => link.classList.toggle('is-active', link.dataset.sectionLink === active.id));
 };
 updatePageState();
 window.addEventListener('scroll', updatePageState, { passive: true });
@@ -28,15 +33,6 @@ menuButton.addEventListener('click', () => {
 mobileMenu.addEventListener('close', closeMenu);
 mobileMenu.querySelectorAll('[data-menu-close]').forEach(control => control.addEventListener('click', closeMenu));
 document.querySelector('[data-year]').textContent = new Date().getFullYear();
-
-const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
-const sections = sectionLinks.map(link => document.getElementById(link.dataset.sectionLink)).filter(Boolean);
-const sectionObserver = new IntersectionObserver(entries => {
-  const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!visible) return;
-  sectionLinks.forEach(link => link.classList.toggle('is-active', link.dataset.sectionLink === visible.target.id));
-}, { rootMargin: '-20% 0px -60%', threshold: [0,.2,.5] });
-sections.forEach(section => sectionObserver.observe(section));
 
 if (reducedMotion) {
   document.querySelectorAll('.reveal').forEach(element => element.classList.add('is-visible'));
