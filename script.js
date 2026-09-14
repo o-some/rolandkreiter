@@ -131,7 +131,6 @@ let startX = 0;
 let startScroll = 0;
 let projectIndex = 0;
 let trackFrame = 0;
-let trackSettleTimer = 0;
 
 const targetForSlide = index => Math.min(
   slides[index].offsetLeft - track.offsetLeft,
@@ -165,12 +164,11 @@ trackNext.addEventListener('click', () => scrollToProject(projectIndex + 1));
 trackPrev.addEventListener('click', () => scrollToProject(projectIndex - 1));
 track.addEventListener('scroll', () => {
   if (!trackFrame) trackFrame = requestAnimationFrame(updateTrackIndex);
-  clearTimeout(trackSettleTimer);
-  trackSettleTimer = setTimeout(() => {
-    updateTrackIndex();
-    const target = targetForSlide(projectIndex);
-    if (Math.abs(track.scrollLeft - target) > 2) track.scrollTo({ left: target, behavior: 'auto' });
-  }, 160);
+}, { passive: true });
+track.addEventListener('scrollend', () => {
+  updateTrackIndex();
+  const target = targetForSlide(projectIndex);
+  if (Math.abs(track.scrollLeft - target) > 2) track.scrollTo({ left: target, behavior: 'auto' });
 }, { passive: true });
 track.addEventListener('keydown', event => {
   if (!['ArrowLeft','ArrowRight'].includes(event.key)) return;
