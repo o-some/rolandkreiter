@@ -10,12 +10,13 @@ Date: 13 September 2026
 - `/workspace/scratch/8f206493c8a0/upload/B3B027D5-8034-4644-812D-C0E2FD2D8DAF.jpeg` — mobile product crop and split-card alignment, 707 × 1536 px.
 - `/workspace/scratch/8f206493c8a0/upload/022000F0-7103-4ED7-9D0F-255017FE0E3B.jpeg` — mobile gallery at card 05 and blocked vertical-scroll region, 707 × 1536 px.
 - `/workspace/scratch/8f206493c8a0/upload/E93751EA-C5F9-4FC5-B7A0-369037244F15.jpeg` — mobile gallery stopped between AromaPour and GIANT, 707 × 1536 px.
+- `/workspace/scratch/8f206493c8a0/upload/E345136D-45A0-4D9C-A810-EA222578C52E.jpeg` — mobile gallery visibly communicates horizontal navigation while swipe is disabled, 707 × 1536 px.
 
 The supplied captures include iPhone Safari chrome and appear to be approximately 2× density. The exact CSS viewport could not be reproduced by the available cloud browser.
 
 ## Implementation evidence
 
-- Live implementation: `https://o-some.github.io/rolandkreiter/?release=6a7b62f`
+- Live implementation: `https://o-some.github.io/rolandkreiter/?release=93179bb`
 - Browser-rendered desktop viewport: 1363 × 936 CSS px, device density controlled by the cloud browser.
 - Desktop full-view checks were performed for Selected Works and the new Freelance section.
 - The cloud browser did not expose a supported mobile viewport control, so no valid same-viewport mobile screenshot could be saved.
@@ -44,6 +45,10 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
   - Fix: free mobile swiping was removed; every button step targets one exact slide offset. Each slide also uses `scroll-snap-stop: always` as a defensive desktop/tablet fallback.
 - [P1] Three project images used portrait or extra-wide source ratios while GIANT and Impact used 3:2.
   - Fix: mysqueeze, AromaPour and Daily rituals were re-composed as new 1536 × 1024 derivatives. GIANT and Impact were retained, so all five gallery assets are now exactly 3:2 without rebuilding the already correct two.
+- [P1] The follow-up mobile state still advertised a carousel but horizontal touch navigation had been removed.
+  - Fix: native horizontal overflow and iOS momentum scrolling are restored with `touch-action: auto`, while mandatory snap and `scroll-snap-stop` keep one complete card at rest. A `scrollend` correction aligns the nearest card without interrupting button animations.
+- [P2] The interaction state was not visible beyond the numeric counter.
+  - Fix: a restrained native progress line now advances from 1 to 5, and Previous/Next disable correctly at the boundaries. The instruction now accurately names both swipe and button navigation.
 
 ## Required fidelity surfaces
 
@@ -56,6 +61,8 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
 ## Primary interactions tested
 
 - Selected Works next control advanced through all five slides; the counter settled at `05` and the last card reached the track's valid end position.
+- A direct 01 → 02 live test aligned the track exactly at 904 px, updated the progress value to `2`, and enabled both direction controls.
+- Repeated navigation reached project `05`; Next disabled at the boundary and the track settled at its valid maximum scroll position.
 - Every gallery image reported a 1536 × 1024 natural size on the live deployment.
 - Freelancer section and both CTA targets are present.
 - No website-origin console errors were observed; one unrelated browser-extension metadata error was ignored.
@@ -73,5 +80,7 @@ The supplied captures include iPhone Safari chrome and appear to be approximatel
 7. New iPhone evidence showed that `touch-action: pan-x` blocked vertical scrolling and native swipe could leave the carousel between cards.
 8. Mobile touch handling was changed to vertical page panning plus button-only card navigation, and the three ratio outliers were rebuilt as exact 3:2 assets.
 9. Post-fix live desktop evidence confirms versioned CSS `v=10`, five 1536 × 1024 gallery images, successful navigation to card 05 and zero document-level horizontal overflow. A refreshed same-state iPhone capture remains required for a valid mobile comparison.
+10. The newest iPhone evidence showed the usability contradiction created by disabling native swipe while retaining carousel cues.
+11. Native swipe was restored with two-axis gesture recognition, mandatory one-card snapping, end-of-scroll correction, boundary states and a minimal progress line. Live desktop interaction checks confirm exact button alignment and correct 1–5 state updates; exact iPhone touch verification remains pending.
 
 final result: blocked
