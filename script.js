@@ -123,31 +123,54 @@ if (window.matchMedia('(pointer:fine)').matches) {
 const track = document.querySelector('[data-track]');
 const slides = [...track.querySelectorAll('.project-slide')];
 const current = document.querySelector('[data-track-current]');
+const trackProgress = document.querySelector('[data-track-progress]');
+const trackNext = document.querySelector('[data-track-next]');
+const trackPrev = document.querySelector('[data-track-prev]');
 let dragging = false;
 let startX = 0;
 let startScroll = 0;
 let projectIndex = 0;
 let trackFrame = 0;
+let trackSettleTimer = 0;
+
+const targetForSlide = index => Math.min(
+  slides[index].offsetLeft - track.offsetLeft,
+  Math.max(0, track.scrollWidth - track.clientWidth)
+);
+
+const syncTrackUI = () => {
+  current.textContent = String(projectIndex + 1).padStart(2,'0');
+  trackPrev.disabled = projectIndex === 0;
+  trackNext.disabled = projectIndex === slides.length - 1;
+  trackProgress.value = projectIndex + 1;
+  trackProgress.setAttribute('aria-label', `Projekt ${projectIndex + 1} von ${slides.length}`);
+};
 
 const updateTrackIndex = () => {
   trackFrame = 0;
   projectIndex = slides.reduce((closest, slide, index) => {
-    const distance = Math.abs((slide.offsetLeft - track.offsetLeft) - track.scrollLeft);
+    const distance = Math.abs(targetForSlide(index) - track.scrollLeft);
     return distance < closest.distance ? { index, distance } : closest;
   }, { index: 0, distance: Infinity }).index;
-  current.textContent = String(projectIndex + 1).padStart(2,'0');
+  syncTrackUI();
 };
 
 const scrollToProject = index => {
   projectIndex = Math.max(0, Math.min(slides.length - 1, index));
-  current.textContent = String(projectIndex + 1).padStart(2,'0');
-  track.scrollTo({ left: slides[projectIndex].offsetLeft - track.offsetLeft, behavior: reducedMotion ? 'auto' : 'smooth' });
+  syncTrackUI();
+  track.scrollTo({ left: targetForSlide(projectIndex), behavior: reducedMotion ? 'auto' : 'smooth' });
 };
 
-document.querySelector('[data-track-next]').addEventListener('click', () => scrollToProject(projectIndex + 1));
-document.querySelector('[data-track-prev]').addEventListener('click', () => scrollToProject(projectIndex - 1));
+trackNext.addEventListener('click', () => scrollToProject(projectIndex + 1));
+trackPrev.addEventListener('click', () => scrollToProject(projectIndex - 1));
 track.addEventListener('scroll', () => {
   if (!trackFrame) trackFrame = requestAnimationFrame(updateTrackIndex);
+  clearTimeout(trackSettleTimer);
+  trackSettleTimer = setTimeout(() => {
+    updateTrackIndex();
+    const target = targetForSlide(projectIndex);
+    if (Math.abs(track.scrollLeft - target) > 2) track.scrollTo({ left: target, behavior: 'auto' });
+  }, 160);
 }, { passive: true });
 track.addEventListener('keydown', event => {
   if (!['ArrowLeft','ArrowRight'].includes(event.key)) return;
@@ -175,6 +198,7 @@ const stopDrag = event => {
 track.addEventListener('pointerup', stopDrag);
 track.addEventListener('pointercancel', stopDrag);
 window.addEventListener('resize', () => scrollToProject(projectIndex), { passive: true });
+syncTrackUI();
 
 const awardsTrack = document.querySelector('[data-awards-track]');
 const awardCards = [...awardsTrack.children];
